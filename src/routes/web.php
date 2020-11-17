@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/users','HomeController@getUsers');
+
 Route::get('/', function () {
     return view('welcome');
 });

@@ -32,8 +32,6 @@
                         <div class="dropdown-menu">
                             <a href="" @click.prevent="freeDraw('brush')" class="list-group-item list-group-item-action tool dropdown-item"><span><i class="fas fa-paint-brush  mr-2  "></i></span> Brush</a>
                             <a href="" @click.prevent="freeDraw('pen')" class="list-group-item list-group-item-action tool dropdown-item"><span> <i class="fas fa-pen   mr-2 "></i> </span> Pen</a>
-                            <a href="" @click.prevent="eraser" class="list-group-item list-group-item-action tool dropdown-item"><span><i class="fas fa-eraser  mr-2  "></i></span> Eraser</a>
-                            
                         </div>
                    </div>
                     <div class="btn-group dropright">
@@ -250,7 +248,7 @@ import RecentDrawing from './RecentDrawing'
                     this.currentUsers = users;
                     setTimeout(()=>{
                       this.checkAdminPresence(this.currentUsers);
-                    },60000)
+                    },30000)
                     console.log(this.currentUsers)
                 })
                 .joining((user)=>{
@@ -266,7 +264,6 @@ import RecentDrawing from './RecentDrawing'
                 });
 
             Echo.private('undoredo').listen('UndoRedoEvent',(e)=>{
-                console.log('Action is:' + e.action)
                 if(e.action === 'redo'){
                     this.undoRedo('redo', true)
                 }else if(e.action === 'undo'){
@@ -278,7 +275,6 @@ import RecentDrawing from './RecentDrawing'
             });
 
             Echo.private('drawrequest').listen('DrawRequestEvent',(e)=>{
-              console.log(e.user)
               if(this.user.isAdmin){
                 this.addRequestToTheQueue(e.user);
               }

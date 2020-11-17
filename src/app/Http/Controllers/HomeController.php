@@ -26,6 +26,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function getUsers(){
+        $users = User::all();
+        return $users;
+    }
     public function index()
     {
         $name = Auth::user();

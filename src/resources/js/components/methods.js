@@ -10,8 +10,6 @@ export default {
 
         // Drawing the grid
         drawGrid () {
-
-
             var grid = 50;
             var unitScale = 10;
             var canvasWidth =  100 * unitScale;
@@ -23,21 +21,19 @@ export default {
             var gridLines = [];
 
             for (var i = 0; i < (canvasWidth / grid); i++) {
-            // this.canvas.add(new fabric.Line([ i * grid, 0, i * grid, canvasHeight], { type:'line', stroke: '#ccc', selectable: false }));
-            // this.canvas.add(new fabric.Line([ 0, i * grid, canvasWidth, i * grid], { type: 'line', stroke: '#ccc', selectable: false }))
-            gridLines.push(new fabric.Line([ i * grid, 0, i * grid, canvasHeight], { type:'line', stroke: '#ccc', selectable: false }));
-            gridLines.push(new fabric.Line([ 0, i * grid, canvasWidth, i * grid], { type: 'line', stroke: '#ccc', selectable: false }));
+            gridLines.push(new fabric.Line([ i * grid, 0, i * grid, canvasHeight], 
+                { type:'line', stroke: '#ccc', selectable: false }));
+            gridLines.push(new fabric.Line([ 0, i * grid, canvasWidth, i * grid], 
+                { type: 'line', stroke: '#ccc', selectable: false }));
              }
-
             this.gridGroup = new fabric.Group(gridLines, {
                 selectable: false,
                 evented: false
               })
               this.gridGroup.addWithUpdate();
               this.canvas.add(this.gridGroup);
-
         },
-
+      //  Removing the grid
         removeGrid() {
             this.gridGroup && this.canvas.remove(this.gridGroup);
             this.gridGroup = null;
@@ -73,16 +69,6 @@ export default {
             this.canvas.isDrawingMode = 1;
             this.canvas.freeDrawingBrush.color = "purple";
             this.canvas.renderAll();
-        },
-
-        eraser(){
-                this.canvas.isDrawingMode = false;
-                this.canvas.isDrawingMode = true;
-                // fabric.PencilBrush.prototype.globalCompositeOperation = "destination-out";
-                this.canvas.freeDrawingBrush.color = "#cccccc";
-                this.canvas.freeDrawingBrush.globalCompositeOperation = "destination-out";
-                this.canvas.renderAll();
-        
         },
 
         removeDrawMode(){
@@ -122,7 +108,6 @@ export default {
              id: new Date().getUTCMilliseconds(),
            });
            this.removeObject(circle.id);
-
            this.canvas.add(circle);
          },
         
@@ -144,7 +129,6 @@ export default {
            this.canvas.add(rectangle);
         },
         //  Fabric js Triangle
-
         drawTriangle(){
             this.removeDrawMode();
             var triangle = new fabric.Triangle({
@@ -157,7 +141,6 @@ export default {
                 id: new Date().getUTCMilliseconds(),
             });
             this.removeObject(triangle.id);
-
             this.canvas.add(triangle);
         },
 
@@ -298,10 +281,8 @@ export default {
                 this.canvasEventListeners();
                 this.canvas.renderAll();
                 this.canvasMods += 1;
-                
             }
-            
-           }else if(action === 'redo'){
+            }else if(action === 'redo'){
                console.log(`Canvas mod is ${this.canvasMods}`);
             if(!isEcho){
                 this.sendUndoRedoRequest('redo');
@@ -312,11 +293,8 @@ export default {
                 this.canvas.loadFromJSON(this.canvasStates[this.canvasStates.length - 1 - this.canvasMods + 1]);
                 this.canvasEventListeners();
                 this.canvas.renderAll();
-                
-                this.canvasMods -= 1;
-                
+                this.canvasMods -= 1; 
             }
-           
            }else if(action === 'clear'){
             if(!isEcho){
                 this.sendUndoRedoRequest('clear');

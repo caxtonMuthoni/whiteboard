@@ -2105,7 +2105,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.currentUsers = users;
       setTimeout(function () {
         _this.checkAdminPresence(_this.currentUsers);
-      }, 60000);
+      }, 30000);
       console.log(_this.currentUsers);
     }).joining(function (user) {
       _this.usersCount += 1;
