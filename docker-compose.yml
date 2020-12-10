@@ -1,11 +1,11 @@
-version: '3'
+version: "3"
 
 networks:
   laravel:
 
 services:
   site:
-    image: cagimoto/whiteboard:site
+    image: ajacdocker/whiteboard:site
     build:
       context: .
       dockerfile: nginx.dockerfile
@@ -38,7 +38,7 @@ services:
       - laravel
 
   php:
-    image: cagimoto/whiteboard:php
+    image: ajacdocker/whiteboard:php
     build:
       context: .
       dockerfile: php.dockerfile
@@ -51,7 +51,7 @@ services:
       - laravel
 
   composer:
-    image: cagimoto/whiteboard:composer
+    image: ajacdocker/whiteboard:composer
     build:
       context: .
       dockerfile: composer.dockerfile
@@ -75,7 +75,7 @@ services:
     entrypoint: ['npm']
 
   artisan:
-    image: cagimoto/whiteboard:artisan
+    image: ajacdocker/whiteboard:artisan
     build:
       context: .
       dockerfile: php.dockerfile
